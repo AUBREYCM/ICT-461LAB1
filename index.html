@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Makes the layout scale correctly on phones/tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICT461 · WebSystems — Course Registration</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Page banner: identifies the unit and program -->
+    <header class="site-header">
+      <p class="unit-code">ICT461</p>
+      <h1>WebSystems Registration</h1>
+      <p class="subtitle">
+        Semester 1 · Bachelor of Science in Computer Science
+      </p>
+    </header>
+
+    <main>
+      <!-- novalidate: turns off the browser's default validation bubbles
+         so our own JS validation (script.js) fully controls the error messages -->
+      <form id="registration-form" novalidate>
+        <!-- === Section 1: basic student info === -->
+        <fieldset>
+          <legend>Student details</legend>
+
+          <div class="field">
+            <!-- label "for" + input "id" must match — this is what makes the
+               label clickable and lets screen readers announce it -->
+            <label for="full-name">Full name</label>
+            <input
+              type="text"
+              id="full-name"
+              name="fullName"
+              autocomplete="name"
+              required
+            />
+            <!-- role="alert" tells assistive tech to announce this text as soon
+               as it changes, without the user needing to navigate to it -->
+            <p class="error" id="full-name-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="student-id">Student ID</label>
+            <!-- pattern gives a native HTML fallback check; our JS does the
+               real validation and message, so both layers agree -->
+            <input
+              type="text"
+              id="student-id"
+              name="studentId"
+              placeholder="e.g. CS2023-0142"
+              pattern="[A-Za-z]{2}[0-9]{4}-[0-9]{4}"
+              required
+              aria-describedby="student-id-hint"
+            />
+            <!-- aria-describedby links the input to this hint text for screen readers -->
+            <p class="hint" id="student-id-hint">
+              Format: two letters, year, dash, four digits.
+            </p>
+            <p class="error" id="student-id-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+            />
+            <p class="error" id="email-error" role="alert"></p>
+          </div>
+        </fieldset>
+
+        <!-- === Section 2: single-choice tutorial time === -->
+        <fieldset>
+          <legend>Tutorial group</legend>
+          <p class="hint">Choose one weekly session.</p>
+
+          <!-- role="radiogroup" reinforces for assistive tech that these
+             three radios are one related set -->
+          <div
+            class="radio-group"
+            role="radiogroup"
+            aria-describedby="group-error"
+          >
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="group-a"
+                name="tutorialGroup"
+                value="Group A — Mon 09:00"
+              />
+              <label for="group-a">Group A — Monday, 09:00</label>
+            </div>
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="group-b"
+                name="tutorialGroup"
+                value="Group B — Wed 14:00"
+              />
+              <label for="group-b">Group B — Wednesday, 14:00</label>
+            </div>
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="group-c"
+                name="tutorialGroup"
+                value="Group C — Fri 11:00"
+              />
+              <label for="group-c">Group C — Friday, 11:00</label>
+            </div>
+          </div>
+          <p class="error" id="group-error" role="alert"></p>
+        </fieldset>
+
+        <!-- === Section 3: multi-choice electives === -->
+        <fieldset>
+          <legend>Optional units</legend>
+          <p class="hint">Select any electives to register alongside ICT461.</p>
+
+          <div class="checkbox-group">
+            <div class="checkbox-option">
+              <input
+                type="checkbox"
+                id="unit-db"
+                name="electives"
+                value="ICT452 Databases"
+              />
+              <label for="unit-db">ICT452 — Databases</label>
+            </div>
+            <div class="checkbox-option">
+              <input
+                type="checkbox"
+                id="unit-net"
+                name="electives"
+                value="ICT470 Networks"
+              />
+              <label for="unit-net">ICT470 — Networks</label>
+            </div>
+            <div class="checkbox-option">
+              <input
+                type="checkbox"
+                id="unit-ai"
+                name="electives"
+                value="ICT481 Intro to AI"
+              />
+              <label for="unit-ai">ICT481 — Intro to AI</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Confirmation checkbox, required before submission counts as valid -->
+        <div class="field checkbox-option agreement">
+          <input type="checkbox" id="agree" name="agree" required />
+          <label for="agree">I confirm these details are correct</label>
+          <p class="error" id="agree-error" role="alert"></p>
+        </div>
+
+        <button type="submit">Register for ICT461</button>
+
+        <!-- Hidden until JS fills it in and reveals it after a successful submit.
+           aria-live="polite" makes screen readers announce it automatically -->
+        <div
+          id="confirmation"
+          class="confirmation"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+      </form>
+    </main>
+
+    <footer class="site-footer">
+      <p>Unit 1 Lab · WebSystems · Submitted as coursework evidence.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
