@@ -4,7 +4,7 @@
   --paper: #f6f4ef; /* page background */
   --panel: #ffffff; /* form card background */
   --line: #d8d3c7; /* dividers/borders */
-  --accent: #8a3b2c; /* buttons, focus outline, highlights */
+  --accent: #0f766e; /* buttons, focus outline, highlights */
   --accent-soft: #f1e3dd; /* confirmation box background */
   --error: #b3261e; /* validation error text */
   --radius: 4px;
@@ -174,7 +174,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: #6f2e22;
+  background: #1d7a72;
 }
 
 /* Success panel, shown by script.js after a valid submit */
